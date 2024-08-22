@@ -85,6 +85,7 @@ const register = async (req, res, next) => {
         });
     }
     catch (error) {
+        console.log("baba");
         next((0, error_1.createError)(500, error.message));
     }
 };
