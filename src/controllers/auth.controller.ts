@@ -99,9 +99,6 @@ export const register = async (
       user: {
         id: savedUser._id,
         email: savedUser.email,
-        firstName: savedUser.firstName,
-        lastName: savedUser.lastName,
-        displayName: savedUser.displayName,
       },
     });
   } catch (error) {
@@ -123,8 +120,6 @@ export const getLoggedInUser = async (req: AuthRequest, res: Response) => {
     res.json({
       _id: user._id,
       email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
     });
   } catch (err) {
     // Log the error and return a generic 500 response

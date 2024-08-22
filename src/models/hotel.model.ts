@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Types } from "mongoose";
 
 // Interface to define the structure of the Hotel document
 interface IFacility {
@@ -21,6 +21,7 @@ export interface IHotel extends Document {
   description: string;
   hotelLink: string;
   image: string;
+  rooms: Types.ObjectId[];
   facilities: IFacility[];
   guestReviews: IReview[];
 }
@@ -45,9 +46,10 @@ const HotelSchema: Schema = new Schema({
   description: { type: String, required: true },
   hotelLink: { type: String, required: true },
   image: { type: String, required: true },
+  rooms: [{ type: Schema.Types.ObjectId, ref: "Room" }],
   facilities: { type: [FacilitySchema], required: true },
   guestReviews: { type: [ReviewSchema], required: true },
 });
 
 // Export the model with the IHotel interface
-export default mongoose.model < IHotel > ("Hotel", HotelSchema);
+export default mongoose.model<IHotel>("Hotel", HotelSchema);
