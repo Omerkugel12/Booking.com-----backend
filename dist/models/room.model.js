@@ -1,14 +1,12 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const RoomSchema = new mongoose_1.default.Schema({
+const mongoose_1 = require("mongoose");
+const RoomSchema = new mongoose_1.Schema({
     title: {
         type: String,
         required: true,
     },
+    hotel_id: { type: mongoose_1.Schema.Types.ObjectId, ref: "Hotel", required: true },
     price: {
         type: Number,
         required: true,
@@ -21,6 +19,11 @@ const RoomSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
-    roomNumbers: [{ number: Number, unavailableDates: { type: [Date] } }],
+    roomNumbers: [
+        {
+            number: { type: Number, required: true },
+            unavailableDates: { type: [Date], required: true },
+        },
+    ],
 }, { timestamps: true });
-exports.default = mongoose_1.default.model("Room", RoomSchema);
+exports.default = (0, mongoose_1.model)("Room", RoomSchema);

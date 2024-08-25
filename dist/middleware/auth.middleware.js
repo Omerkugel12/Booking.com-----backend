@@ -18,6 +18,7 @@ function verifyToken(req, res, next) {
     try {
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
         req.userId = decoded.userId; // Attach the userId to the request object
+        console.log("User ID from token:", req.userId);
         next(); // Call the next middleware
     }
     catch (error) {

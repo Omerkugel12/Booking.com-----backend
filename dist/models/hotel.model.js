@@ -28,22 +28,34 @@ const FacilitySchema = new mongoose_1.Schema({
     category: { type: String, required: true },
     name: { type: String, required: true },
 });
-const ReviewSchema = new mongoose_1.Schema({
+const GuestRatingSchema = new mongoose_1.Schema({
     category: { type: String, required: true },
-    rating: { type: Number, required: true, min: 0, max: 10 },
+    rating: { type: Number, required: true },
+});
+const AvailabilitySchema = new mongoose_1.Schema({
+    startDate: { type: Date, required: true },
+    endDate: { type: Date, required: true },
+    available: { type: Number, required: true },
+});
+const RoomAvailabilitySchema = new mongoose_1.Schema({
+    roomType: { type: String, required: true }, // e.g., "Standard", "Deluxe"
+    price: { type: Number, required: true }, // Price per night
+    maxGuests: { type: Number, required: true }, // Maximum guests allowed
+    availability: [AvailabilitySchema],
 });
 const HotelSchema = new mongoose_1.Schema({
     name: { type: String, required: true },
-    address: { type: String, required: true },
-    scoreNumber: { type: Number, required: true, min: 0, max: 10 },
+    city: { type: String, required: true },
+    scoreNumber: { type: Number, required: true },
     scoreLetter: { type: String, required: true },
     reviewsCount: { type: Number, required: true },
-    price: { type: String, required: true },
     description: { type: String, required: true },
-    hotelLink: { type: String, required: true },
     image: { type: String, required: true },
     facilities: { type: [FacilitySchema], required: true },
-    guestReviews: { type: [ReviewSchema], required: true },
+    avgGuestRating: { type: [GuestRatingSchema], required: true },
+    distance: { type: String, required: true },
+    freeCancellation: { type: Boolean, required: true },
+    prepayment: { type: Boolean, required: true },
+    roomAvailability: { type: [RoomAvailabilitySchema], required: true },
 });
-// Export the model with the IHotel interface
 exports.default = mongoose_1.default.model("Hotel", HotelSchema);
