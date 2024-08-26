@@ -1,14 +1,14 @@
 import express from "express";
 import {
-  getHotelById,
-  getHotels,
-  updateRoomAvailability,
+    addNewReservation,
+ getHotelByID,
 } from "../controllers/hotel.controller";
 
-const router = express.Router();
+const hotelRoutes = express.Router();
 
-router.get("/:id", getHotelById);
-router.get("/", getHotels);
-router.put("/availability", updateRoomAvailability); // Updating room availability
+hotelRoutes.get("/:id", getHotelByID);
+hotelRoutes.post("/reservation", addNewReservation)
+// router.get("/", getHotels);
+// router.put("/availability", updateRoomAvailability); // Updating room availability
 
-export default router;
+export default hotelRoutes;

@@ -23,8 +23,9 @@ export function verifyToken(
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
       userId: string;
     };
+
     req.userId = decoded.userId; // Attach the userId to the request object
-    console.log("User ID from token:", req.userId);
+    // console.log("User ID from token:", req.userId);
 
     next(); // Call the next middleware
   } catch (error) {
